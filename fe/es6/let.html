@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			// var a = [];
+			// for (var i = 0; i < 10; i++) {
+			//   a[i] = function () {
+			// 	console.log(i);
+			//   };
+			// }
+			// a[6](); // 10
+			
+			// var a = [];
+			// for (let i = 0; i < 10; i++) {
+			//   a[i] = function () {
+			// 	console.log(i);
+			//   };
+			// }
+			// a[6](); // 6
+			// console.info(a[6])
+			
+			
+			// for (let i = 0; i < 3; i++) {
+			//   let i = 'abc';
+			//   console.log(i);
+			// }
+			// abc
+			// abc
+			// abc
+			
+			// var 的情况
+// 			console.log(foo); // 输出undefined
+// 			var foo = 2;
+// 
+// 			// let 的情况
+// 			console.log(bar); // 报错ReferenceError
+// 			let bar = 2;
+			
+// 			if (true) {
+// 			  // TDZ开始
+// 			  // tmp = 'abc'; // ReferenceError
+// 			  // console.log(tmp); // ReferenceError
+// 
+// 			  let tmp; // TDZ结束
+// 			  console.log(tmp); // undefined
+// 
+// 			  tmp = 123;
+// 			  console.log(tmp); // 123
+// 			}
+'use strict';
+if (true){
+  function f() {
+		console.info(1)
+	}
+}
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
