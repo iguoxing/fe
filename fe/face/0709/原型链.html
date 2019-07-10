@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			// 1\原型链继承：
+			//
+			function SuperFunc(){
+				this.colors=['red','green']
+			}
+			SuperFunc.prototype.Fun=function(){
+				console.info(1)
+			}
+			function SubFunc(){
+				
+			}
+			SubFunc.prototype=new SuperFunc();
+			var obj1=new SubFunc()
+			obj1.colors.push('white')
+			console.info(obj1.colors)
+			let obj2=new SubFunc()
+			console.info(obj2.colors);
+			
+			//instanceof 可以判断一个引用是否属于某构造函数；
+			console.info(obj1 instanceof SubFunc)//true
+			
+			//isPrototypeOf()方法测试一个对象是否存在另一个对象的原型链上
+			console.info(SubFunc.prototype.isPrototypeOf(obj1))//true
+			console.info(SuperFunc.prototype.isPrototypeOf(obj1))//true
+			console.info(Object.prototype.isPrototypeOf(obj1))//true
+			// console.info(obj1.isPrototypeOf(SuperFunc))
+			// console.info(obj1.isPrototypeOf(obj2))
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

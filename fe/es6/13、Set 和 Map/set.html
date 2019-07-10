@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。
+			const set =new Set([2,3,4,5,5])
+			console.info(set)//Set(4) {2, 3, 4, 5}	
+			console.info([...set])//[2, 3, 4, 5],获取Set中的数组的方法1
+			console.log(Array.from(new Set([2,3,3,5,6])));// [2, 3, 5, 6],获取Set中的数组的方法2
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

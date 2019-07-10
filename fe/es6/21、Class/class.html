@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//手打的,略微有点成就感
+			//在ES6中，子类的构造函数必须含有super函数
+			//super表示的是调用父类的构造函数，虽然是父类的构造函数，但是this指向的却是cat
+			class Animal{
+				constructor(){
+					this.type="animal"
+				}
+				says(say){
+					console.info(this.type+' says:'+say)
+				}
+			}
+			let animal=new Animal();
+			animal.says('hello')
+			class Cat extends Animal{
+				constructor(){
+					super()
+					this.type="cat"
+				}
+			}
+			let cat =new Cat();
+			cat.says("hi")
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

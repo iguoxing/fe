@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//1、超时调用的代码都是在全局作用域中执行的，因此函数中this的值在非严格模式下指向window对象，在严格模式下是undefined
+			// class Animal {
+			//   constructor() {
+			// 	this.type = "animal";
+			//   }
+			//   say(val) {
+			// 	  console.info(this)//Animal {type: "animal"}
+			// 	  console.info(this.type)//animal
+			// 	setTimeout(function () {
+			// 	  console.log(this); //window
+			// 	  console.log(this.type + " says " + val);
+			// 	}, 1000)
+			//   }
+			// }
+			// var animal = new Animal();
+			// animal.say("hi"); //undefined says hi
+			
+			//2/继承当前上下文的 this 关键字
+			// class Animal {
+			//   constructor() {
+			// 	this.type = "animal";
+			//   }
+			//   say(val) {
+			// 	setTimeout(() => {
+			// 	  console.log(this); //Animal
+			// 	  console.log(this.type + ' says ' + val);
+			// 	}, 1000)
+			//   }
+			// }
+			// var animal = new Animal();
+			// animal.say("hi");
+			
+			//闭包
+			function showNum(i) {
+			  return function () {
+				console.log(i)
+			  }
+			}
+			var a = []
+			for (var i = 0; i < 5; i++) {
+			  a[i] = showNum(i)(); //循环输出1,2,3,4
+			}////循环输出0，1,2,3,4
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

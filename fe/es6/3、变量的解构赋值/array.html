@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//1、 ...是拓展运算符
+			// let [head, ...tail] = [1, 2, 3, 4];
+			// console.info(tail) // [2, 3, 4]
+			
+			//2  解构赋值时有默认值undefined,包括...拓展运算符
+			// let [x, y, ...z] = ['a'];
+			// console.info(x)
+			// console.info(y)// undefined
+			// console.info(z)// []
+			
+			//3 赋值失败的本质原因是因为 false,NaN,undefined,null  这几种数据解构中没有 Iterator接口
+			//undefined,null,NaN,false区别
+			//https://www.jianshu.com/p/e2386d64d07b
+			// false 的数据类型是boolean布尔类型 typeof(false)
+			//undefined  未被赋值，声明了一个变量却没赋值时会返回undefined
+			//NaN typeof(NAN)//number;NaN 是一个全局对象的属性。NaN 属性的初始值就是 NaN，和 Number.NaN 的值一样。
+				//通常都是在计算失败时，作为 Math 的某个方法的返回值出现的（例如：Math.sqrt(-1)）或者尝试将一个字符串解析成数字但失败了的时候（例如：parseInt("blabla")）。
+				//NaN不等于任何值，连它本身也不等于。我们可以利用这一点去获取数组中的NaN;NaN === NaN; //false;return arr !== arr;
+			//null typeof(null)//object 值null是一个javascript字面量，表示空值，既没有对象被呈现。它是javascript原始值之一。
+				//null和undefined的区别  typeof null // object typeof undefined // undefined null === undefined // false null == undefined // true (==会强制转换类型)
+				// 判断null值   https://www.cnblogs.com/yangchin9/p/10722571.html
+			// let [foo] = false;
+			// let [foo] = NaN;
+			// let [foo] = undefined;
+			// let [foo] = null;
+			
+			//4  Set 对象允许你存储任何类型的唯一值，无论是原始值或者是对象引用。
+			// let [x, y, z] = new Set([['a'], 'b', 'c']);
+			// console.info(x) // ['a']
+			
+			// 5、Generator 原生具有Iterator接口
+			//配合yield接口,间接实现了斐波那契数列
+// 			function* fibs() {
+// 			  let a = 0;
+// 			  let b = 1;
+// 			  while (true) {
+// 				yield a;
+// 				[a, b] = [b, a + b];
+// 			  }
+// 			}
+// 
+// 			let [first, second, third, fourth, fifth, sixth,seven] = fibs();
+			// console.info(seven)//8
+			// console.info(sixth) // 5
+			
+			// 6/解构赋值的默认值,优先取赋值的,再取默认值,
+			let [x=1,y=x]=[2];
+			console.info(y)
+			
+			 
+			 
+			
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
