@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//yes
+			var twoSum = function(nums, target) {
+				var p1,p2;
+				for(let i=0;i<nums.length;i++){
+					if(!p2){
+						p1=i;
+						let m=target-nums[i];
+						for(let j=i+1;j<nums.length;j++){
+							if(nums[j]==m){
+								p2=j;
+								break;
+							}
+						}
+					}
+				}
+				return [p1,p2]
+			};
+
+			console.info(twoSum([-3,4,3,90],0))
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

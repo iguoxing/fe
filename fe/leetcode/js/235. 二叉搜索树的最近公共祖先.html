@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+
+function TreeNode(val) {
+	this.val = val;
+	this.left = this.right = null;
+	 }
+	 
+var lowestCommonAncestor = function(root, p, q) {
+	 
+  let findNode = (root, val) => {
+      if (root === null) {
+        return null;
+      }
+      if (root.val === val) {
+        return root;
+      } else if (root.val > val) {
+        return findNode(root.left, val);
+      } else {
+        return findNode(root.right, val);
+      }
+    };
+
+    let isCommonParent = (node, val1, val2) => {
+      return (findNode(node, val1) !== null) && (findNode(node, val2) !== null);
+    };
+
+
+    let lowestCommonParent = (node, val1, val2) => {
+      if (isCommonParent(node.left, val1, val2)) {
+        return lowestCommonParent(node.left, val1, val2);
+      } else if (isCommonParent(node.right, val1, val2)) {
+        return lowestCommonParent(node.right, val1, val2);
+      } else {
+        return node;
+      }
+    };
+
+    return lowestCommonParent(root, p, q);
+  
+};
+
+let root=[6,2,8,0,4,7,9,null,null,3,5],p=2,q=8
+
+console.info(lowestCommonAncestor(root,p,q))
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

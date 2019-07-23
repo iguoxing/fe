@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html><head><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+		<meta charset="utf-8">
+		<title></title>
+		
+		<link rel="stylesheet" type="text/css" href="https://admore-cas.admore.com.cn/adv/v3/css/app/new.min.css?v=0.04"/>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="https://admore-cas.admore.com.cn/home/js/plugins/jquery/jquery-1.11.3.min.js"></script>
+
+<!--bootstrap-->
+<link href="https://admore-cas.admore.com.cn/home/js/plugins/bootstrap/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
+<script type="text/javascript" src="https://admore-cas.admore.com.cn/home/js/plugins/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://admore-cas.admore.com.cn/home/js/plugins/bootstrap/bootstrap-hover-dropdown.min.js"></script>
+
+<!-- angularjs base -->
+<script type="text/javascript" src="https://admore-cas.admore.com.cn/home/js/angularjs/base/angular.all.min.js"></script>
+<script type="text/javascript" src="https://admore-cas.admore.com.cn/home/js/angularjs/base/angular-post-encode.js"></script>
+
+<script src="wordcloud2.js"></script>
+<!-- <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script> -->
+<!-- 
+todo
+1、颜色及字体大小自定义 【OK】
+2、悬浮框 展示
+3、点击事件 50%
+4、关键词铺满屏幕【OK】
+5、筛选条件
+ -->
+ 
+ <style>
+	 body{background: #eee;padding-top: 100px;}
+	 p{font-size: 24px;color: #888;}
+ </style>
+
+	</head>
+	<body>
+		<div ng-app="app" ng-controller="IndexController">
+			<div align="center">
+				<div id="canvas" width="640px" height="260px"></div>
+				<!-- <canvas id="canvas" width="640px" height="260px"></canvas> -->
+			</div>
+		</div>
+		
+	
+	<script>
+		var app = angular.module('app', ['ngAnimate'
+			, 'ngRoute'
+			, "ngMessages"
+			, "httpPostFix"
+		]);
+		app.controller('IndexController', function ($rootScope, $http, $scope, $location) {
+			var options = eval({
+			    "list": [],
+			    "gridSize": 12, 
+			    "fontWeight": function(word, weight, fontSize){
+					return (fontSize>16)?500:400;
+				},
+			    "fontFamily": 'PingFangSC-Regular,Times, serif', 
+				"backgroundColor":'#fff',
+			    "rotateRatio": 0 ,// probability for the word to rotate. 1 means always rotate
+				"shape":'diamond',
+				"click":function(item, dimension, event){
+					console.info(item)
+					// console.info(dimension)
+					// console.info(event)
+				},
+				
+			});
+			var canvas = document.getElementById('canvas');
+			
+			$scope.wordData=[];
+			$scope.wordCloudData=[];
+			$scope.rankType=200;
+			$scope.hotItem={type:'8',min:4605,max:20000};
+			
+			$scope.handleData=function(value){
+				if(value.rank){
+					let f=12;
+					if(value.rank>60){
+						f=14;
+					}else if(value.rank<61 && value.rank >10){
+						f=18;
+					}else if(value.rank<11 && value.rank >3){
+						f=20;
+					}else if(value.rank<4){
+						f=26;
+					}
+					let c='';
+					if(value.searchIndex>=8000){
+						c='#2A7EFF';
+					}else if(value.searchIndex>=7000&&value.searchIndex<8000){
+						c='#413D49';
+					}else if(value.searchIndex>=6000&&value.searchIndex<7000){
+						c='#6AA4FF';
+					}else if(value.searchIndex>=5000&&value.searchIndex<6000){
+						c='#817F86';
+					}else if(value.searchIndex>=4605&&value.searchIndex<5000){
+						c='#94BEFF';
+					}else{
+						c='#ABA9AF';
+					}
+					$scope.wordData.push([value.keyword,f,c,value.searchIndex])
+				}
+			}
+		
+			
+			$scope.loadWordData=function () {
+				$http({
+					method: "get",
+					url: "https://asou.admore.com.cn/analysis/api/app/keyCloud?trackId=414245413",
+					headers:{"Content-Type":"application/x-www-form-urlencoded"}
+				}).then(function(data) {
+					if(data.data.code==1){
+						angular.forEach(data.data.data,function (value) {
+							$scope.handleData(value);
+						});
+						console.info($scope.wordData)
+						options.list=$scope.wordData
+						WordCloud(canvas, options);
+					}else{
+						toastr.warning(data.data.message,'提示');
+					}
+				});
+
+			}
+			
+			$scope.loadWordData()
+		});
+	</script>
+
+
+</body>
+</html>

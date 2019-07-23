@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+			//js的number类型有个最大值（安全值）。即2的53次方，为9007199254740992
+			var addStrings = function(num1, num2) {
+				let arr=[];
+				let val=0;
+				let len=num1.length>num2.length?num1.length:num2.length;
+				while (len>num1.length){num1='0'+num1;}
+				while (len>num2.length){num2='0'+num2;}
+				
+				
+				for(let i=len-1;i>-1;i--){
+					let sum=Number(num1.charAt(i))+Number(num2.charAt(i))+val;
+					if(sum>9){
+						arr.push(sum%10);
+						val=1;
+					}else{
+						arr.push(sum)
+						val=0;
+					}
+					sum=0;
+				}
+
+				return (val==1)?('1'+arr.reverse().join('')):arr.reverse().join('');
+				
+			};
+			
+			console.info(addStrings('111','2'))
+			
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

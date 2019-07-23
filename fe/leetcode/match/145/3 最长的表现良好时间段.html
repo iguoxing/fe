@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script>
+/**
+ * @param {number[]} hours
+ * @return {number}
+ */
+var longestWPI = function(hours) {
+    //找出来连续 劳累天数最长的一段
+	let arrs=[]
+	for(let i=0;i<hours.length;i++){
+		let obj{
+			t:0,
+			r:0,
+			arr:[]
+		}
+		
+		do{
+			if(hours[i]>8){
+				obj.t=obj.t+1
+				arr.push(hours[i])
+			}else{
+				obj.r=obj.r+1;
+			}
+		}while (obj.t>obj.r){
+			console.info(1)
+		}
+	}
+	
+};
+
+let hours = [9,9,6,0,6,6,9];
+console.info(longestWPI(hours))
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
