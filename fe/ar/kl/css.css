@@ -1,0 +1,19 @@
+body{
+				margin: 0;
+				padding:0;
+				text-align: center;
+				color: #fff;
+				background: cornflowerblue;
+			}
+			
+			div{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-top: 100px;
+			}
+			
+			img{
+				width: 75%;
+				border-radius: 12px;
+			}
