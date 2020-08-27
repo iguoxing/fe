@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>电话号码的字母组合</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<script>
+			var letterCombinations=function(digits){
+				if(digits.length==0) return []
+				let num_arr=[
+								['a','b','c'],
+								['d','e','f'],
+								['g','h','i'],
+								['j','k','l'],
+								['m','n','o'],
+								['p','q','r','s'],
+								['t','u','v'],
+								['w','x','y','z']
+							]
+								
+				//拆分数字字符串为数值型数组
+				let getNumber=function(arr){
+					let arrNum=arr.map(item=>{
+						if(Number(item)>1){
+							return Number(item)-2
+						}
+					});
+					console.info(arrNum)
+					for(let i=0;i<arrNum.length;i++){
+						//删除多余的元素
+						if(arrNum[i]==undefined){
+							arrNum.splice(i,1)
+						}
+					}
+					console.info(arrNum)
+					return arrNum
+				}
+				
+				// 本质就是l_c的顺序组合
+				let l_c=getNumber(digits.split(''))
+				let l_arr=l_c.map(item => {
+					return num_arr[item]
+				})
+				let arr_tmp=[]
+				
+				function getArr2Combine(arr1,arr2){
+					let tmp=[]
+					for(let i of arr1){
+						for(let j of arr2){
+							tmp.push(i+j)
+						}
+					}
+					arr_tmp=tmp;
+					if(l_arr.length>0){
+						getArr2Combine(arr_tmp,l_arr.shift(0,1))
+					}
+				}
+				
+				// 处理数组长度为1的情况
+				if(l_arr.length==1){
+					arr_tmp=l_arr[0]
+				}else{
+					getArr2Combine(l_arr.shift(0,1),l_arr.shift(0,1))
+				}
+				return arr_tmp
+			}
+
+			console.info(letterCombinations(''))
+			
+		</script>
+	</body>
+
+</html>
