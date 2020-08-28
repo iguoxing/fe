@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>657. 机器人能否返回原点</title>
+	</head>
+	<body>
+			<script>
+				/**
+				 * @param {string} moves
+				 * @return {boolean}
+				 */
+				//RL成对，UD成对
+				var judgeCircle = function(moves) {
+					if(moves.length=='') return true;
+					
+					let obj={r:0,l:0,u:0,d:0};
+					for(let i=0;i<moves.length;i++){
+						if(moves[i]=='R'){obj.r+=1}
+						if(moves[i]=='L'){obj.l+=1}
+						if(moves[i]=='U'){obj.u+=1}
+						if(moves[i]=='D'){obj.d+=1}
+					}
+					if(obj.r==obj.l && obj.u==obj.d){
+						return true;
+					}else{
+						return false
+					}
+				
+				};
+				
+				console.info(judgeCircle('LL'))
+			</script>
+	</body>
+</html>
